@@ -1,0 +1,81 @@
+---
+output: rmarkdown::github_document
+---
+
+# pigeon
+
+Parse Portable Game Notation ('PGN') Files
+
+## Description
+
+'Portable Game Notation' ('PGN') is a plain text computer-processible format for recording chess games (both the moves and related data), supported by many chess programs. It was was devised around 1993, by Steven J. Edwards, and was first popularized via the 'Usenet' newsgroup 'rec.games.chess'. 'PGN' is structured "for easy reading and writing by human users and for easy parsing and generation by  computer programs." The chess moves themselves are given in algebraic chess notation. Tools are provided -- based on `pgn-extract` (<https://www.cs.kent.ac.uk/people/staff/djb/pgn-extract/>) by David J. Barnes -- to parse 'PGN' files into a data frame.
+    
+## What's Included?
+
+The following functions are implemented:
+
+- `read_pgn`:	Read in a PGN file
+
+The following built-in data sets are included:
+
+- `system.file("extdata", "r7.pgn", package="pigeon")`: 2017 FIDE World Cup extract
+
+## Installation
+
+```{r eval=FALSE}
+devtools::install_github("hrbrmstr/pigeon")
+```
+
+```{r message=FALSE, warning=FALSE, error=FALSE, include=FALSE}
+options(width=120)
+```
+
+## Usage
+
+```{r message=FALSE, warning=FALSE, error=FALSE}
+library(pigeon)
+library(tidyverse)
+
+# current verison
+packageVersion("pigeon")
+```
+
+Built-in example
+
+```{r message=FALSE, warning=FALSE, error=FALSE}
+fide <- read_pgn(system.file("extdata", "r7.pgn", package="pigeon"))
+
+fide
+
+glimpse(fide)
+```
+
+Bigger example
+
+```{r message=FALSE, warning=FALSE, error=FALSE}
+tf <- tempfile(fileext = ".zip")
+td <- tempdir()
+download.file("https://www.pgnmentor.com/players/Adams.zip",  tf)
+fil <- unzip(tf, exdir = td)
+
+adams <- read_pgn(fil)
+
+adams
+
+glimpse(adams)
+
+unlink(tf)
+unlink(fil)
+```
+
+## Test Results
+
+```{r message=FALSE, warning=FALSE, error=FALSE}
+library(pigeon)
+library(testthat)
+
+date()
+
+test_dir("tests/")
+```
+
