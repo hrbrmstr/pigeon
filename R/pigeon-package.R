@@ -6,14 +6,14 @@
 #' popularized via the 'Usenet' newsgroup 'rec.games.chess'. 'PGN' is structured
 #' "for easy reading and writing by human users and for easy parsing and generation by
 #' computer programs." The chess moves themselves are given in algebraic chess notation.
-#' Tools are provided -- based on 'pgn-extract' <https://www.cs.kent.ac.uk/people/staff/djb/pgn-extract/>
-#' by David J. Barnes -- to parse 'PGN' files into a data frame.
+#' Tools are provided to parse 'PGN' files into a data frame.
 #'
 #' @md
 #' @name pigeon
 #' @docType package
 #' @author Bob Rudis (bob@@rud.is)
-#' @importFrom jsonlite fromJSON
-#' @useDynLib pigeon
-#' @importFrom Rcpp sourceCpp
+#' @importFrom stringi stri_detect_regex stri_read_lines stri_match_all_regex
+#' @importFrom stringi stri_match_first_regex stri_replace_all_regex
+#' @importFrom purrr map2_df set_names
+#' @importFrom dplyr progress_estimated
 NULL

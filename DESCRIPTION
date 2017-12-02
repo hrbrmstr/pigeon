@@ -1,11 +1,10 @@
 Package: pigeon
 Type: Package
 Title: Parse Portable Game Notation ('PGN') Files
-Version: 0.1.0
-Date: 2017-09-24
+Version: 0.2.0
+Date: 2017-12-02
 Authors@R: c(
-      person("Bob", "Rudis", email = "bob@rud.is", role = c("aut", "cre")),
-      person("David J.", "Barnes", role = "aut", comment = "pgn-extract library")
+      person("Bob", "Rudis", email = "bob@rud.is", role = c("aut", "cre"))
     )
 Maintainer: Bob Rudis <bob@rud.is>
 Description: 'Portable Game Notation' ('PGN') is a plain text computer-processible format 
@@ -25,7 +24,7 @@ Suggests:
 Depends:
     R (>= 3.2.0)
 Imports:
-    jsonlite,
-    Rcpp
+    purrr,
+    stringi,
+    dplyr
 RoxygenNote: 6.0.1
-LinkingTo: Rcpp

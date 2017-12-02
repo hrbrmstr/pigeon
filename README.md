@@ -1,34 +1,37 @@
 
-pigeon
-======
+# pigeon
 
-Parse Portable Game Notation ('PGN') Files
+Parse Portable Game Notation (‘PGN’) Files
 
-Description
------------
+## Description
 
-'Portable Game Notation' ('PGN') is a plain text computer-processible format for recording chess games (both the moves and related data), supported by many chess programs. It was was devised around 1993, by Steven J. Edwards, and was first popularized via the 'Usenet' newsgroup 'rec.games.chess'. 'PGN' is structured "for easy reading and writing by human users and for easy parsing and generation by computer programs." The chess moves themselves are given in algebraic chess notation. Tools are provided -- based on `pgn-extract` (<https://www.cs.kent.ac.uk/people/staff/djb/pgn-extract/>) by David J. Barnes -- to parse 'PGN' files into a data frame.
+‘Portable Game Notation’ (‘PGN’) is a plain text computer-processible
+format for recording chess games (both the moves and related data),
+supported by many chess programs. It was was devised around 1993, by
+Steven J. Edwards, and was first popularized via the ‘Usenet’ newsgroup
+‘rec.games.chess’. ‘PGN’ is structured “for easy reading and writing
+by human users and for easy parsing and generation by computer
+programs.” The chess moves themselves are given in algebraic chess
+notation. Tools are provided to parse ‘PGN’ files into a data frame.
 
-What's Included?
-----------------
+## What’s Included?
 
 The following functions are implemented:
 
--   `read_pgn`: Read in a PGN file
+  - `read_pgn`: Read in a PGN file
 
 The following built-in data sets are included:
 
--   `system.file("extdata", "r7.pgn", package="pigeon")`: 2017 FIDE World Cup extract
+  - `system.file("extdata", "r7.pgn", package="pigeon")`: 2017 FIDE
+    World Cup extract
 
-Installation
-------------
+## Installation
 
 ``` r
 devtools::install_github("hrbrmstr/pigeon")
 ```
 
-Usage
------
+## Usage
 
 ``` r
 library(pigeon)
@@ -38,7 +41,7 @@ library(tidyverse)
 packageVersion("pigeon")
 ```
 
-    ## [1] '0.1.0'
+    ## [1] '0.2.0'
 
 Built-in example
 
@@ -49,11 +52,11 @@ fide
 ```
 
     ## # A tibble: 2 x 12
-    ##            Event    Site       Date Round               White               Black  Result WhiteElo BlackElo   ECO
-    ## *          <chr>   <chr>      <chr> <chr>               <chr>               <chr>   <chr>    <chr>    <chr> <chr>
-    ## 1 World Cup 2017 Tbilisi 2017.09.23  44.1 Aronian Levon (ARM)    Ding Liren (CHN) 1/2-1/2     2799     2777   A18
-    ## 2 World Cup 2017 Tbilisi 2017.09.24  45.1    Ding Liren (CHN) Aronian Levon (ARM) 1/2-1/2     2777     2799   E06
-    ## # ... with 2 more variables: LiveChessVersion <chr>, Moves <list>
+    ##            Event    Site       Date Round               White               Black  Result BlackElo WhiteElo
+    ##            <chr>   <chr>      <chr> <chr>               <chr>               <chr>   <chr>    <chr>    <chr>
+    ## 1 World Cup 2017 Tbilisi 2017.09.23  44.1 Aronian Levon (ARM)    Ding Liren (CHN) 1/2-1/2     2777     2799
+    ## 2 World Cup 2017 Tbilisi 2017.09.24  45.1    Ding Liren (CHN) Aronian Levon (ARM) 1/2-1/2     2799     2777
+    ## # ... with 3 more variables: LiveChessVersion <chr>, ECO <chr>, Moves <list>
 
 ``` r
 glimpse(fide)
@@ -68,11 +71,11 @@ glimpse(fide)
     ## $ White            <chr> "Aronian Levon (ARM)", "Ding Liren (CHN)"
     ## $ Black            <chr> "Ding Liren (CHN)", "Aronian Levon (ARM)"
     ## $ Result           <chr> "1/2-1/2", "1/2-1/2"
-    ## $ WhiteElo         <chr> "2799", "2777"
     ## $ BlackElo         <chr> "2777", "2799"
-    ## $ ECO              <chr> "A18", "E06"
+    ## $ WhiteElo         <chr> "2799", "2777"
     ## $ LiveChessVersion <chr> "1.4.8", "1.4.8"
-    ## $ Moves            <list> [c("c4", "Nf6", "Nc3", "e6", "e4", "d5", "cxd5", "exd5", "e5", "Ne4", "Nf3", "Bf5", "Be2"...
+    ## $ ECO              <chr> "A18", "E06"
+    ## $ Moves            <list> [<"c4", "{[%clk 1:30:45]} Nf6 {[%clk 1:30:26]} 2. Nc3 {[%clk 1:31:06]} e6">, <"d4", "{[%c...
 
 Bigger example
 
@@ -89,7 +92,7 @@ adams
 
     ## # A tibble: 2,982 x 11
     ##             Event      Site       Date Round              White              Black  Result WhiteElo BlackElo   ECO
-    ##  *          <chr>     <chr>      <chr> <chr>              <chr>              <chr>   <chr>    <chr>    <chr> <chr>
+    ##             <chr>     <chr>      <chr> <chr>              <chr>              <chr>   <chr>    <chr>    <chr> <chr>
     ##  1 Lloyds Bank op    London 1984.??.??     1     Adams, Michael    Sedgwick, David     1-0                     C05
     ##  2 Lloyds Bank op    London 1984.??.??     3     Adams, Michael  Dickenson, Neil F     1-0              2230   C07
     ##  3 Lloyds Bank op    London 1984.??.??     4       Hebden, Mark     Adams, Michael     1-0     2480            B10
@@ -118,30 +121,9 @@ glimpse(adams)
     ## $ WhiteElo <chr> "", "", "2480", "2310", "", "", "2360", "2200", "2360", "2285", "2360", "2250", "2360", "2225", "2...
     ## $ BlackElo <chr> "", "2230", "", "", "2370", "2430", "2080", "2360", "2225", "2360", "2245", "2360", "2260", "2360"...
     ## $ ECO      <chr> "C05", "C07", "B10", "D42", "B99", "B56", "B70", "B13", "C85", "E45", "C84", "B10", "C85", "A22", ...
-    ## $ Moves    <list> [c("e4", "e6", "d4", "d5", "Nd2", "Nf6", "e5", "Nfd7", "f4", "c5", "c3", "Nc6", "Ndf3", "cxd4", "...
+    ## $ Moves    <list> [<"e4", "e6", "d4", "d5", "Nd2", "Nf6", "e5", "Nfd7", "f4", "c5", "c3", "Nc6", "Ndf3", "cxd4", "c...
 
 ``` r
 unlink(tf)
 unlink(fil)
 ```
-
-Test Results
-------------
-
-``` r
-library(pigeon)
-library(testthat)
-
-date()
-```
-
-    ## [1] "Mon Sep 25 05:43:16 2017"
-
-``` r
-test_dir("tests/")
-```
-
-    ## testthat results ========================================================================================================
-    ## OK: 0 SKIPPED: 0 FAILED: 0
-    ## 
-    ## DONE ===================================================================================================================
