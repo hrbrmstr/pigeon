@@ -4,7 +4,7 @@
 \alias{pgn_count}
 \title{Count number of games in a PGN file}
 \usage{
-pgn_count(path, n = Inf, sample = FALSE)
+pgn_count(path)
 }
 \arguments{
 \item{path}{path to PGN file}

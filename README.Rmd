@@ -10,10 +10,11 @@ Parse Portable Game Notation ('PGN') Files
 
 'Portable Game Notation' ('PGN') is a plain text computer-processible format for recording chess games (both the moves and related data), supported by many chess programs. It was was devised around 1993, by Steven J. Edwards, and was first popularized via the 'Usenet' newsgroup 'rec.games.chess'. 'PGN' is structured "for easy reading and writing by human users and for easy parsing and generation by  computer programs." The chess moves themselves are given in algebraic chess notation. Tools are provided to parse 'PGN' files into a data frame.
     
-## What's Included?
+## What's in the tin?
 
 The following functions are implemented:
 
+- `pgn_count`:	Count number of games in a PGN file
 - `read_pgn`:	Read in a PGN file
 
 The following built-in data sets are included:

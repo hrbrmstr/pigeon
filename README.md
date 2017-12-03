@@ -14,10 +14,11 @@ by human users and for easy parsing and generation by computer
 programs.” The chess moves themselves are given in algebraic chess
 notation. Tools are provided to parse ‘PGN’ files into a data frame.
 
-## What’s Included?
+## What’s in the tin?
 
 The following functions are implemented:
 
+  - `pgn_count`:	Count number of games in a PGN file
   - `read_pgn`: Read in a PGN file
 
 The following built-in data sets are included:
@@ -90,7 +91,7 @@ adams <- read_pgn(fil)
 adams
 ```
 
-    ## # A tibble: 2,982 x 11
+    ## # A tibble: 2,968 x 11
     ##             Event      Site       Date Round              White              Black  Result WhiteElo BlackElo   ECO
     ##             <chr>     <chr>      <chr> <chr>              <chr>              <chr>   <chr>    <chr>    <chr> <chr>
     ##  1 Lloyds Bank op    London 1984.??.??     1     Adams, Michael    Sedgwick, David     1-0                     C05
@@ -103,13 +104,13 @@ adams
     ##  8         BCF-ch Edinburgh 1985.??.??     2 Abayasekera, Roger     Adams, Michael     1-0     2200     2360   B13
     ##  9         BCF-ch Edinburgh 1985.??.??     3     Adams, Michael    Jackson, Sheila 1/2-1/2     2360     2225   C85
     ## 10         BCF-ch Edinburgh 1985.??.??     4     Muir, Andrew J     Adams, Michael 1/2-1/2     2285     2360   E45
-    ## # ... with 2,972 more rows, and 1 more variables: Moves <list>
+    ## # ... with 2,958 more rows, and 1 more variables: Moves <list>
 
 ``` r
 glimpse(adams)
 ```
 
-    ## Observations: 2,982
+    ## Observations: 2,968
     ## Variables: 11
     ## $ Event    <chr> "Lloyds Bank op", "Lloyds Bank op", "Lloyds Bank op", "Lloyds Bank op", "Lloyds Bank op", "Lloyds ...
     ## $ Site     <chr> "London", "London", "London", "London", "London", "London", "Edinburgh", "Edinburgh", "Edinburgh",...

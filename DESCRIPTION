@@ -18,6 +18,7 @@ Description: 'Portable Game Notation' ('PGN') is a plain text computer-processib
 URL: https://github.com/hrbrmstr/pigeon
 BugReports: https://github.com/hrbrmstr/pigeon/issues
 License: GPL-3
+SystemRequirements: C++11
 Suggests:
     testthat,
     covr
@@ -26,5 +27,7 @@ Depends:
 Imports:
     purrr,
     stringi,
-    dplyr
+    dplyr,
+    Rcpp
 RoxygenNote: 6.0.1
+LinkingTo: Rcpp

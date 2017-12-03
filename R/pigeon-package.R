@@ -14,6 +14,8 @@
 #' @author Bob Rudis (bob@@rud.is)
 #' @importFrom stringi stri_detect_regex stri_read_lines stri_match_all_regex
 #' @importFrom stringi stri_match_first_regex stri_replace_all_regex
-#' @importFrom purrr map2_df set_names
+#' @importFrom purrr map2_df set_names map_df safely
 #' @importFrom dplyr progress_estimated
+#' @useDynLib pigeon
+#' @importFrom Rcpp sourceCpp
 NULL
