@@ -1,3 +1,5 @@
+.s_int_pgn_count <- purrr::safely(int_pgn_count)
+
 #' Count number of games in a PGN file
 #'
 #' @md
@@ -10,6 +12,10 @@ pgn_count <- function(path) {
 
   if (!file.exists(path)) stop("File not found", call.=FALSE)
 
-  int_pgn_count(path)
+  res <- .s_int_pgn_count(path)
+
+  if (is.null(res)) message("Error reading file: [%s]", res$error)
+
+  return(res$result)
 
 }

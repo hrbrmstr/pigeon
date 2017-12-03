@@ -1,4 +1,8 @@
+// [[Rcpp::depends(RcppProgress)]]
+
 #include <Rcpp.h>
+
+#include "progress.hpp"
 
 #include <iostream>
 #include <fstream>
@@ -29,6 +33,8 @@ double int_pgn_count(std::string path) {
 // [[Rcpp::export]]
 List int_pgn_recs(std::string path, NumericVector v) {
 
+  bool display_progress = TRUE;
+
   std::filebuf fb;
   fb.open(path, std::ios::in | std::ios::binary);
   std::istream fis(&fb);
@@ -40,6 +46,8 @@ List int_pgn_recs(std::string path, NumericVector v) {
   int rec = 0;
   std::cmatch m;
 
+  Progress p(v.size(), display_progress);
+
   while (char* line = fin.next_line()) {
 
     if (std::regex_match(line, m, pgn_regex)) { // Found ^[Event ...
@@ -47,6 +55,10 @@ List int_pgn_recs(std::string path, NumericVector v) {
       rec++; // increment Event record count
 
       if (rec == v[idx]) { // if it matches one of the ones we said we want
+
+        if (Progress::check_abort()) return(List());
+
+        p.increment();
 
         CharacterVector cv; // bag of holding
 
@@ -58,8 +70,12 @@ List int_pgn_recs(std::string path, NumericVector v) {
           if (ll == "") break;
         }
 
+        bool seen_moves = false;
+
         while(char *line = fin.next_line()) { // going to store the moves and break on the next ""
           std::string ll = std::string(line);
+          if ((!seen_moves) && (ll == "")) continue; // account for malformed whitespace
+          seen_moves = true;
           cv.push_back(ll);
           if (ll == "") break;
         }

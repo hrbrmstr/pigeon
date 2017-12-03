@@ -2,6 +2,8 @@ pgn_movetext_regex <- '([NBKRQ]?[a-h]?[1-8]?[\\-x]?[a-h][1-8](?:=?[nbrqkNBRQK])?
 
 .parse_pgn_rec <- function(game) {
 
+  message(game[1])
+
   meta <- game[which(stri_detect_regex(game, "^\\["))]
   meta <- stri_match_first_regex(meta, "\\[([[:alpha:]]+) (.*)]")[,2:3]
 
@@ -29,9 +31,13 @@ pgn_movetext_regex <- '([NBKRQ]?[a-h]?[1-8]?[\\-x]?[a-h][1-8](?:=?[nbrqkNBRQK])?
 
   if (!file.exists(path)) stop("File not found", call.=FALSE)
 
-  map_df(int_pgn_recs(path, unique(sort(recs))), ~{
+  recs <- int_pgn_recs(path, unique(sort(recs)))
+
+  pb <- dplyr::progress_estimated(length(recs))
+  map_df(recs, ~{
+    pb$tick()$print()
     res <- .s_parse_pgn_rec(.x)
-    if (is.null(res$result)) message("Malformed record...")
+    if (is.null(res$result)) message("Malformed record... [%s]", res$error)
     res$result
   })
 
