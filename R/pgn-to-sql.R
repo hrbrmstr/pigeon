@@ -10,7 +10,7 @@
   ret <- as.list(set_names(value, field))
 
   movetext <- game[which(stri_detect_regex(game, "^[^\\[]"))]
-  movetext <- paste0(movetext, collapse="")
+  movetext <- paste0(movetext, collapse=" ")
 
   ret$Movetext <- movetext
 

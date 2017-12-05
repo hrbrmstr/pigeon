@@ -12,8 +12,15 @@ pgn_movetext_regex <- '([NBKRQ]?[a-h]?[1-8]?[\\-x]?[a-h][1-8](?:=?[nbrqkNBRQK])?
   ret <- as.list(set_names(value, field))
 
   moves <- game[which(stri_detect_regex(game, "^[^\\[]"))]
+  moves <- paste0(moves, collapse=" ")
+
+  moves_raw <- moves
+
+  moves <- stri_replace_all_regex(moves, "[\\(\\)\\{\\}]", "")
   moves <- stri_match_all_regex(moves, pgn_movetext_regex)[[1]][,-1]
   moves <- moves[!is.na(moves)]
+
+  ret$moves_raw <- list(moves_raw)
 
   ret$Moves <- list(moves)
 
