@@ -18,6 +18,7 @@ notation. Tools are provided to parse ‘PGN’ files into a data frame.
 
 The following functions are implemented:
 
+  - `pgn2sql`:  Convert a PGN file to a SQLite DB
   - `pgn_count`:	Count number of games in a PGN file
   - `read_pgn`: Read in a PGN file
 

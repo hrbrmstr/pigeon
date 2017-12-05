@@ -4,20 +4,26 @@
 \alias{pgn2sql}
 \title{Convert a PGN file to a SQLite DB}
 \usage{
-pgn2sql(paths, sql_out, overwrite = TRUE)
+pgn2sql(paths, sql_out)
 }
 \arguments{
 \item{paths}{path(s) to PGN file(s)}
 
 \item{sql_out}{SQLite database file (will be created if it doesn't exist)}
-
-\item{overwrite}{overwrite the \code{games} table if it exists?}
 }
 \description{
-Read one ore more PGN files and store the game(s) into a SQLite database.
+Read one ore more PGN files and store the game(s) into a SQLite database under
+a \code{games} table (which will be created if it does not exist).
 }
 \details{
-If \code{sql_out} exists and \code{overwrite} is \code{TRUE} then the \code{games} table will be
-dropped and overwritten. If \code{overwrite} if \code{FALSE} and \code{sql_out} exists and
-there is a \code{games} table, the \code{games} table will be appended to.
+A \code{.} will be printed to stdout for ever 1,000 records inserted.
+}
+\examples{
+tf <- tempfile(fileext = ".db")
+pgn2sql(system.file("extdata", "r7.pgn", package="pigeon"), tf)
+
+tmp <- dplyr::src_sqlite(tf)
+dplyr::glimpse(dplyr::tbl(tmp, "games"))
+
+unlink(tf)
 }
