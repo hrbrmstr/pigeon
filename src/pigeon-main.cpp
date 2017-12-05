@@ -31,9 +31,7 @@ double int_pgn_count(std::string path) {
 }
 
 // [[Rcpp::export]]
-List int_pgn_recs(std::string path, NumericVector v) {
-
-  bool display_progress = TRUE;
+List int_pgn_recs(std::string path, NumericVector v, bool display_progress) {
 
   std::filebuf fb;
   fb.open(path, std::ios::in | std::ios::binary);

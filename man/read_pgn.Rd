@@ -4,7 +4,7 @@
 \alias{read_pgn}
 \title{Read chess match files in Portable Game Notation (PGN) format}
 \usage{
-read_pgn(path, n = Inf, sample = FALSE)
+read_pgn(path, n = Inf, sample = FALSE, quiet = TRUE)
 }
 \arguments{
 \item{path}{path to PGN file}
@@ -17,7 +17,12 @@ set \code{sample} to \code{TRUE} and \code{n} to be the number of samples you wa
 \item{sample}{if \code{TRUE} \strong{and} \code{n} is \strong{not} \code{Inf} then the \code{n} games
 retrieved will be from a random sample. Use \code{set.seed()} before
 calling this if you want the results to be reproducible.}
+
+\item{quiet}{if \code{TRUE} no progress bars will be shown. Defaults to \code{TRUE} (no progress bars)}
 }
 \description{
 Read chess match files in Portable Game Notation (PGN) format
+}
+\examples{
+games <- read_pgn(system.file("extdata", "r7.pgn", package="pigeon"))
 }

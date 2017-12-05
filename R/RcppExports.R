@@ -5,8 +5,8 @@ int_pgn_count <- function(path) {
     .Call('_pigeon_int_pgn_count', PACKAGE = 'pigeon', path)
 }
 
-int_pgn_recs <- function(path, v) {
-    .Call('_pigeon_int_pgn_recs', PACKAGE = 'pigeon', path, v)
+int_pgn_recs <- function(path, v, display_progress) {
+    .Call('_pigeon_int_pgn_recs', PACKAGE = 'pigeon', path, v, display_progress)
 }
 
 int_pgn_iter <- function(path, f) {

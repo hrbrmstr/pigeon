@@ -17,14 +17,15 @@ BEGIN_RCPP
 END_RCPP
 }
 // int_pgn_recs
-List int_pgn_recs(std::string path, NumericVector v);
-RcppExport SEXP _pigeon_int_pgn_recs(SEXP pathSEXP, SEXP vSEXP) {
+List int_pgn_recs(std::string path, NumericVector v, bool display_progress);
+RcppExport SEXP _pigeon_int_pgn_recs(SEXP pathSEXP, SEXP vSEXP, SEXP display_progressSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
     Rcpp::traits::input_parameter< std::string >::type path(pathSEXP);
     Rcpp::traits::input_parameter< NumericVector >::type v(vSEXP);
-    rcpp_result_gen = Rcpp::wrap(int_pgn_recs(path, v));
+    Rcpp::traits::input_parameter< bool >::type display_progress(display_progressSEXP);
+    rcpp_result_gen = Rcpp::wrap(int_pgn_recs(path, v, display_progress));
     return rcpp_result_gen;
 END_RCPP
 }
@@ -42,7 +43,7 @@ END_RCPP
 
 static const R_CallMethodDef CallEntries[] = {
     {"_pigeon_int_pgn_count", (DL_FUNC) &_pigeon_int_pgn_count, 1},
-    {"_pigeon_int_pgn_recs", (DL_FUNC) &_pigeon_int_pgn_recs, 2},
+    {"_pigeon_int_pgn_recs", (DL_FUNC) &_pigeon_int_pgn_recs, 3},
     {"_pigeon_int_pgn_iter", (DL_FUNC) &_pigeon_int_pgn_iter, 2},
     {NULL, NULL, 0}
 };

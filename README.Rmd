@@ -16,6 +16,7 @@ The following functions are implemented:
 
 - `pgn2sql`:  Convert a PGN file to a SQLite DB
 - `pgn_count`:	Count number of games in a PGN file
+- `pgn_parse_moves`:	Parse a character vector of chess moves in algebraic notations
 - `read_pgn`:	Read in a PGN file
 
 The following built-in data sets are included:

@@ -18,6 +18,7 @@
 
 }
 
+.s_parse_pgn_sql_rec <- purrr::safely(.parse_pgn_sql_rec)
 
 #' Convert a PGN file to a SQLite DB
 #'
@@ -46,19 +47,26 @@ pgn2sql <- function(paths, sql_out) {
   chess_db <- RSQLite::dbConnect(RSQLite::SQLite(), sql_out)
 
   i <- 0
+  parse_errors <- 0
 
   game_insert <- function(x) {
 
     i <<- i + 1
     if ((i %% 1000)==0) cat(".", sep="")
 
-    rec <- .parse_pgn_sql_rec(x)
+    rec <- .s_parse_pgn_sql_rec(x)
 
-    RSQLite::dbExecute(
-      conn = chess_db,
-      statement = "INSERT INTO games VALUES(:Event, :Site, :Date, :Round, :White, :Black, :Movetext)",
-      params = rec
-    ) -> rs
+    if (!is.null(rec$result)) {
+
+      RSQLite::dbExecute(
+        conn = chess_db,
+        statement = "INSERT INTO games VALUES(:Event, :Site, :Date, :Round, :White, :Black, :Movetext)",
+        params = rec$result
+      ) -> rs
+
+    } else {
+      parse_errors <<- parse_errors + 1
+    }
 
   }
 
@@ -81,13 +89,22 @@ CREATE TABLE games (
   not_found <- paths[!file.exists(paths)]
 
   for (f in found) {
-    i <- 0
-    RSQLite::dbBegin(chess_db)
+
+    i <- parse_errors <- 0
+
+    RSQLite::dbBegin(chess_db) # transactions are safer and provide a speed boost
+
     pigeon:::int_pgn_iter(f, game_insert)
+
+    if (i >= 1000) cat("\n", sep="")
+    if (parse_errors > 0) message(sprintf("%s parsing errors/records skipped",
+                                          scales::comma(parse_errors)))
+
     RSQLite::dbCommit(chess_db)
+
   }
 
-  cat("\n", sep="")
+
 
   RSQLite::dbDisconnect(chess_db)
 

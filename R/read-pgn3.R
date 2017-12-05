@@ -9,8 +9,11 @@
 #' @param sample if `TRUE` **and** `n` is **not** `Inf` then the `n` games
 #'        retrieved will be from a random sample. Use `set.seed()` before
 #'        calling this if you want the results to be reproducible.
+#' @param quiet if `TRUE` no progress bars will be shown. Defaults to `TRUE` (no progress bars)
 #' @export
-read_pgn <- function(path, n=Inf, sample=FALSE) {
+#' @examples
+#' games <- read_pgn(system.file("extdata", "r7.pgn", package="pigeon"))
+read_pgn <- function(path, n=Inf, sample=FALSE, quiet = TRUE) {
 
   path <- path.expand(path)
 
@@ -28,6 +31,6 @@ read_pgn <- function(path, n=Inf, sample=FALSE) {
     idx <- 1:tot_games
   }
 
-  .pgn_recs(path, idx)
+  .pgn_recs(path, idx, quiet = quiet)
 
 }

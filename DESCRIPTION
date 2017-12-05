@@ -4,7 +4,10 @@ Title: Parse Portable Game Notation ('PGN') Files
 Version: 0.2.0
 Date: 2017-12-02
 Authors@R: c(
-      person("Bob", "Rudis", email = "bob@rud.is", role = c("aut", "cre"))
+      person("Bob", "Rudis", email = "bob@rud.is", role = c("aut", "cre"),
+             comment = c(ORCID = "0000-0001-5670-2640")),
+      person("Ben", "Strasser", email = "code@ben-strasser.net", role=c("aut"),
+             comment = "LineReader library")
     )
 Maintainer: Bob Rudis <bob@rud.is>
 Description: 'Portable Game Notation' ('PGN') is a plain text computer-processible format 
@@ -13,10 +16,10 @@ Description: 'Portable Game Notation' ('PGN') is a plain text computer-processib
     popularized via the 'Usenet' newsgroup 'rec.games.chess'. 'PGN' is structured 
     "for easy reading and writing by human users and for easy parsing and generation by 
     computer programs." The chess moves themselves are given in algebraic chess notation.
-    Tools are provided -- based on 'pgn-extract' <https://www.cs.kent.ac.uk/people/staff/djb/pgn-extract/> 
-    by David J. Barnes -- to parse 'PGN' files into a data frame.
+    Tools are provided to parse 'PGN' files into a data frame.
 URL: https://github.com/hrbrmstr/pigeon
 BugReports: https://github.com/hrbrmstr/pigeon/issues
+Copyright: file inst/COPYRIGHTS
 License: GPL-3
 SystemRequirements: C++11
 Suggests:

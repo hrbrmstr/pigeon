@@ -2,6 +2,7 @@
 
 export(pgn2sql)
 export(pgn_count)
+export(pgn_parse_moves)
 export(read_pgn)
 import(RSQLite)
 importFrom(Rcpp,sourceCpp)
