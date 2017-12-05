@@ -95,3 +95,48 @@ List int_pgn_recs(std::string path, NumericVector v) {
   return(ret);
 
 }
+
+
+// [[Rcpp::export]]
+void int_pgn_iter(std::string path, Function f) {
+
+  std::filebuf fb;
+  fb.open(path, std::ios::in | std::ios::binary);
+  std::istream fis(&fb);
+
+  io::LineReader fin(path, fis);
+  std::cmatch m;
+
+  while (char* line = fin.next_line()) {
+
+    if (std::regex_match(line, m, pgn_regex)) { // Found ^[Event ...
+
+      CharacterVector cv; // bag of holding
+
+      cv.push_back(line); // store the Event field
+
+      while(char *line = fin.next_line()) { // going to store other fields and break on first ""
+        std::string ll = std::string(line);
+        cv.push_back(ll);
+        if (ll == "") break;
+      }
+
+      bool seen_moves = false;
+
+      while(char *line = fin.next_line()) { // going to store the moves and break on the next ""
+        std::string ll = std::string(line);
+        if ((!seen_moves) && (ll == "")) continue; // account for malformed whitespace
+        seen_moves = true;
+        cv.push_back(ll);
+        if (ll == "") break;
+      }
+
+      f(cv);
+
+    }
+
+  }
+
+  fb.close();
+
+}

@@ -9,3 +9,7 @@ int_pgn_recs <- function(path, v) {
     .Call('_pigeon_int_pgn_recs', PACKAGE = 'pigeon', path, v)
 }
 
+int_pgn_iter <- function(path, f) {
+    invisible(.Call('_pigeon_int_pgn_iter', PACKAGE = 'pigeon', path, f))
+}
+

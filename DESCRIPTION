@@ -28,6 +28,7 @@ Imports:
     purrr,
     stringi,
     dplyr,
-    Rcpp
+    Rcpp,
+    RSQLite
 RoxygenNote: 6.0.1
 LinkingTo: Rcpp, RcppProgress

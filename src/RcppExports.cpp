@@ -28,10 +28,22 @@ BEGIN_RCPP
     return rcpp_result_gen;
 END_RCPP
 }
+// int_pgn_iter
+void int_pgn_iter(std::string path, Function f);
+RcppExport SEXP _pigeon_int_pgn_iter(SEXP pathSEXP, SEXP fSEXP) {
+BEGIN_RCPP
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< std::string >::type path(pathSEXP);
+    Rcpp::traits::input_parameter< Function >::type f(fSEXP);
+    int_pgn_iter(path, f);
+    return R_NilValue;
+END_RCPP
+}
 
 static const R_CallMethodDef CallEntries[] = {
     {"_pigeon_int_pgn_count", (DL_FUNC) &_pigeon_int_pgn_count, 1},
     {"_pigeon_int_pgn_recs", (DL_FUNC) &_pigeon_int_pgn_recs, 2},
+    {"_pigeon_int_pgn_iter", (DL_FUNC) &_pigeon_int_pgn_iter, 2},
     {NULL, NULL, 0}
 };
 
